@@ -1,0 +1,48 @@
+// colors
+$title: #437284;
+$btn1: #438943;
+$btn2: #42d042;
+$white: #fff;
+$grey: rgb(234, 232, 232);
+$red: red;
+
+
+
+
+h4 {
+    color: $title;
+}
+
+label {
+    line-height: 4em;
+}
+
+div {
+    padding: 2em 0;
+}
+
+input {
+    height: 2em;
+    width: 200px;
+    border: 1px solid $grey;
+}
+
+.close {
+    margin-left: 2em;
+    cursor: pointer;
+
+    &:hover {
+        color: $red;
+    }
+}
+
+button {
+    background-color: $btn1;
+    color: $white;
+    padding: .3em .5em;
+    border-radius: .2em;
+
+    &hover {
+        background-color: $btn2;
+    }
+}
