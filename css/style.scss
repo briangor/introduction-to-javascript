@@ -6,22 +6,20 @@ $white: #fff;
 $grey: rgb(234, 232, 232);
 $red: red;
 
+* {
+    line-height: 2em;
+}
+
 h4 {
     color: $title;
 }
 
-label {
-    line-height: 4em;
-}
-
-div {
-    padding: 2em 0;
-}
 
 input {
     height: 2em;
     width: 200px;
     border: 1px solid $grey;
+    padding-left: .5em;
 }
 
 .close {
@@ -38,7 +36,7 @@ button {
     color: $white;
     padding: .3em .5em;
     border-radius: .2em;
-
+margin: 1em 0;
     &hover {
         background-color: $btn2;
     }

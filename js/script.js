@@ -70,13 +70,13 @@ function greetFn() {
 
 let encapsulation = function () {
     let seafood = { small: "shrimp", big: "shark" };
-    alert("small" in seafood); // true
-    alert(seafood.hasOwnProperty("toString")); //false
+    console.log("small" in seafood); // true
+    console.log(seafood.hasOwnProperty("toString")); //false
     for (let item in seafood) {
-        alert(item); //prints the small and big seafood
+        console.log(item); //prints the small and big seafood
     }
 }
-//toSTring was inherited by the Object prototype, it is not unique to the seafood object
+//toString was inherited by the Object prototype, it is not unique to the seafood object
 //The for/in loop will print inherited objects
 
 

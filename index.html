@@ -5,7 +5,7 @@
     <title>JS Features</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -22,11 +22,16 @@
             <p>
                 A block of code designed to perform a particular task
             </p>
-            <label>Amount</label>
-            <input type="number" id="amount" min="0" required>
-            <label for="rate">Rate
-                <input type="number" id="rate" min="0" max="100" required>
-            </label>
+            <div class="my-2">
+                <label class="border">Amount</label>
+                <input type="number" id="amount" min="0"
+                    class="border border-gray-400 hover:border-blue-300 rounded-sm">
+            </div>
+            <div class="my-2">
+                <label class="w-36 border">Rate</label>
+            <input type="number" id="rate" min="0" max="100"
+                class="border border-gray-400 hover:border-blue-300 rounded-sm">
+            </div>
             <p id="result"></p>
             <button onclick="computeRate()">Calculate</button>
         </div>
@@ -34,9 +39,12 @@
         <div class="objects">
             <h4>Objects</h4>
             <form id="report">
-                <input type="text" name="first_name" placeholder="First Name">
-                <input type="text" name="last_name" placeholder="Last Name">
-                <input type="number" name="score" placeholder="Score">   
+                <input type="text" name="first_name" placeholder="First Name"
+                    class="border border-gray-400 hover:border-blue-300 rounded-sm">
+                <input type="text" name="last_name" placeholder="Last Name"
+                    class="border border-gray-400 hover:border-blue-300 rounded-sm">
+                <input type="number" name="score" placeholder="Score"
+                    class="border border-gray-400 hover:border-blue-300 rounded-sm">
             </form>
             <button onclick="generate()">Generate Report</button>
             <pre id="display"></pre>
@@ -45,18 +53,20 @@
         <div id="inheritance">
             <h4>Inheritance</h4>
             <p>
-                Inheritance enables you to define a class that takes all the functionality from a parent class and allows you to add more
+                Inheritance enables you to define a class that takes all the functionality from a parent class and
+                allows you to add more
             </p>
             <label for="">Enter name:</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name" class="border border-gray-400 hover:border-blue-300 rounded-sm">
             <button onclick="greetFn()">Greet</button>
-    
+
         </div>
         <hr>
         <div id="encapsulation">
             <h4>Encapsulation</h4>
             <p>
-                Encapsulation is the bundling of data and the methods that act on that data such that access to that data is restricted from outside
+                Encapsulation is the bundling of data and the methods that act on that data such that access to that
+                data is restricted from outside
             </p>
             <input type="submit" onclick="encapsulation()" value="ENCAPSULATION" /><br />
         </div>
@@ -66,20 +76,20 @@
             <p>
                 JavaScript prototype property also allows you to add new methods to object constructors
             </p>
-    
+
         </div>
         <hr>
         <div id="closure">
             <h4>Closure</h4>
             <p>
-                A closure is a function that references variables in the outer scope from its inner scope. 
+                A closure is a function that references variables in the outer scope from its inner scope.
             </p>
         </div>
     </div>
-    
 
-    
-   
+
+
+
 
     <script src="js/script.js"></script>
 </body>

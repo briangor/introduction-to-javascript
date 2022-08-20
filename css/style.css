@@ -1,19 +1,16 @@
+* {
+  line-height: 2em;
+}
+
 h4 {
   color: #437284;
-}
-
-label {
-  line-height: 4em;
-}
-
-div {
-  padding: 2em 0;
 }
 
 input {
   height: 2em;
   width: 200px;
   border: 1px solid rgb(234, 232, 232);
+  padding-left: 0.5em;
 }
 
 .close {
@@ -29,6 +26,7 @@ button {
   color: #fff;
   padding: 0.3em 0.5em;
   border-radius: 0.2em;
+  margin: 1em 0;
 }
 buttonhover {
   background-color: #42d042;
