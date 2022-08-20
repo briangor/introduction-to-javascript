@@ -14,10 +14,10 @@ let addTodo = () => {
     // create edit and delete buttons
     let editButton = document.createElement('button');
     editButton.innerText = "edit";
-    editButton.classList.add('hover:text-blue-500', 'ml-2');
+    editButton.classList.add('text-blue-400', 'hover:text-blue-500', 'ml-2');
     deleteButton = document.createElement('button');
     deleteButton.innerText = "delete";
-    deleteButton.classList.add('hover:text-red-500', 'ml-2');
+    deleteButton.classList.add('text-red-400', 'hover:text-red-500', 'ml-2');
 
     deleteButton.addEventListener('click', function () {
         removeTodo();
@@ -44,10 +44,9 @@ let addTodo = () => {
 
     // create a span tag to display the todo in the DOM
     let span = document.createElement('span');
+    span.classList.add('h-12','w-96')
     span.innerText = todo_input;
-    let todo_id = todo.id;
 
-    const todo_node = document.createTextNode(todo_input);
     li.appendChild(span);
 
     // apppend edit and delete buttons
@@ -80,7 +79,6 @@ let addTodo = () => {
         items[i].onclick = function () {
             liIndex = tab.indexOf(this.innerHTML);
             console.log(this.innerHTML + " INDEX = " + liIndex);
-        
             getLi_id(liIndex);
         };
     }
