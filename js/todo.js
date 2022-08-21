@@ -3,30 +3,89 @@
 let todo_input;
 let todos = [];
 let todo;
+let completeButton;
+let editButton;
 let deleteButton;
 let li_id;
+let toggleComplete = false;
+let todo_input_el = document.getElementById('todo_input');
+
+let fetchAllTodos = () => {
+    //let allTodos = JSON.parse(localStorage.length);
+    //console.log(allTodos);
+    var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+    while (i--) {
+        values.push(localStorage.getItem(keys[i]));
+    }
+
+    //return values;
+    console.log(values);
+
+}
+
+//fetchAllTodos();
 
 let addTodo = () => {
-    let todo_input_el = document.getElementById('todo_input');
     let ul = document.getElementById('ul');
     let li = document.createElement('li');
 
     // create edit and delete buttons
-    let editButton = document.createElement('button');
+    editButton = document.createElement('button');
     editButton.innerText = "edit";
-    editButton.classList.add('text-blue-400', 'hover:text-blue-500', 'ml-2');
+    editButton.classList.add('text-blue-400', 'hover:text-blue-600', 'ml-2', 'col-span-2');
     deleteButton = document.createElement('button');
     deleteButton.innerText = "delete";
-    deleteButton.classList.add('text-red-400', 'hover:text-red-500', 'ml-2');
+    deleteButton.classList.add('text-red-400', 'hover:text-red-600', 'ml-2', 'col-span-2');
+
+    editButton.addEventListener('click', function () {
+        let items = document.querySelectorAll("#ul li");
+        let tab = [];
+        let liIndex;
+
+        // populate tab with li data
+        for (let i = 0; i < items.length; i++) {
+            tab.push(items[i].innerHTML);
+        }
+
+        // get li index using tab array on li click event
+        for (let i = 0; i < items.length; i++) {
+            items[i].onclick = function () {
+                liIndex = tab.indexOf(this.innerHTML);
+                console.log("INDEX = " + liIndex);
+                updateTodo(liIndex);
+            };
+        }
+
+    })
 
     deleteButton.addEventListener('click', function () {
-        removeTodo();
+        let items = document.querySelectorAll("#ul li");
+        let tab = [];
+        let liIndex;
+
+        // populate tab with li data
+        for (let i = 0; i < items.length; i++) {
+            tab.push(items[i].innerHTML);
+        }
+
+        // get li index using tab array on li click event
+        for (let i = 0; i < items.length; i++) {
+
+            items[i].onclick = function () {
+                liIndex = tab.indexOf(this.innerHTML);
+                console.log("INDEX = " + liIndex);
+                removeTodo(liIndex);
+            };
+        }
     })
 
     todo_input = todo_input_el.value;
 
     if (todo_input == '') {
-        console.log('Empty task');
+        alert('Empty task! Please add a todo');
         return;
     }
 
@@ -42,57 +101,90 @@ let addTodo = () => {
     // add the todo object to a todos array
     todos.push(todo);
 
+    //localStorage.setItem('person', JSON.stringify(person));
+    localStorage.setItem(todo.id, JSON.stringify(todo));
+    console.log(todos);
+    fetchTodos(todo.id);
+
+    let checkbox_span = document.createElement('span');
+    let checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox_span.appendChild(checkbox);
+    checkbox_span.classList.add('col-span-1');
+    checkbox.addEventListener('click', function () {
+        console.log('checkbox clicked');
+        let items = document.querySelectorAll("#ul li");
+        let tab = [];
+        let liIndex;
+        //console.log(items);
+
+        // populate tab with li data
+        for (let i = 0; i < items.length; i++) {
+            tab.push(items[i].innerHTML);
+        }
+
+        // get li index using tab array on li click event
+        for (let i = 0; i < items.length; i++) {
+
+            items[i].onclick = function () {
+                liIndex = tab.indexOf(this.innerHTML);
+                console.log("INDEX = " + liIndex);
+                completeTodo(liIndex);
+            };
+        }
+    })
+
     // create a span tag to display the todo in the DOM
     let span = document.createElement('span');
-    span.classList.add('h-12','w-96')
+    span.classList.add('col-span-7')
     span.innerText = todo_input;
 
-    li.appendChild(span);
-
-    // apppend edit and delete buttons
-    li.append(editButton, deleteButton);
+    // apppend checkbox, span, edit and delete buttons 
+    li.append(checkbox_span, span, editButton, deleteButton);
 
     // style li 
-    li.classList.add('cursor-pointer');
+    li.classList.add('cursor-pointer', 'border', 'border-blue-300', 'hover:border-blue-400', 'mt-2', 'rounded-md', 'bg-gray-100', 'grid', 'grid-cols-12', 'px-2');
 
 
     ul.appendChild(li);
+    ul.classList.add('px-2');
 
     console.log(ul);
     console.log(li);
+    console.log(typeof ul)
     todo_input_el.value = '';
 
 
-    let items = document.querySelectorAll("#ul li");
-    let tab = [];
-    let liIndex;
-    console.log(items);
-
-    // populate tab with li data
-    for (let i = 0; i < items.length; i++) {
-        tab.push(items[i].innerHTML);
-    }
-    //console.log(tab);
-    // get li index using tab array on li click event
-    for (let i = 0; i < items.length; i++) {
-
-        items[i].onclick = function () {
-            liIndex = tab.indexOf(this.innerHTML);
-            console.log(this.innerHTML + " INDEX = " + liIndex);
-            getLi_id(liIndex);
-        };
-    }
-}
-
-// get the index of the selected list element
-let getLi_id = (id) => {
-    console.log(id);
-    li_id = id;
-    
 }
 
 // delete todo element
 let removeTodo = (i) => {
-console.log(li_id);
-    console.log(ul);
+    todos.splice(i, 1);
+    ul.childNodes[i+1].className = 'hidden';
+}
+
+let updateTodo = (i) => {
+    console.log(todos[i].value);
+    todo_input_el.value = todos[i].value;
+    console.log(todo_input_el.value);
+    removeTodo(i);
+}
+
+let completeTodo = (i) => {
+    toggleComplete = !toggleComplete;
+    if (toggleComplete) {
+        ul.childNodes[i+1].classList.add('bg-blue-400');
+    } else if (!toggleComplete) {
+        ul.childNodes[i+1].classList.remove('bg-blue-400');
+    }
+
+}
+
+let fetchTodos = (id) => {
+    let t = JSON.parse(localStorage.getItem(id));
+    console.log(t);
+}
+
+let clearAllTodos = () => {
+    window.localStorage.clear();
 }
