@@ -26,10 +26,8 @@ button {
   color: #fff;
   padding: 0.3em 0.5em;
   border-radius: 0.2em;
-  margin: 1em 0;
-}
-buttonhover {
-  background-color: #42d042;
+  margin: 1em button hover;
+  margin-background-color: #42d042;
 }
 
 /*# sourceMappingURL=style.css.map */

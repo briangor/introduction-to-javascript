@@ -10,24 +10,6 @@ let li_id;
 let toggleComplete = false;
 let todo_input_el = document.getElementById('todo_input');
 
-let fetchAllTodos = () => {
-    //let allTodos = JSON.parse(localStorage.length);
-    //console.log(allTodos);
-    var values = [],
-        keys = Object.keys(localStorage),
-        i = keys.length;
-
-    while (i--) {
-        values.push(localStorage.getItem(keys[i]));
-    }
-
-    //return values;
-    console.log(values);
-
-}
-
-//fetchAllTodos();
-
 let addTodo = () => {
     let ul = document.getElementById('ul');
     let li = document.createElement('li');
@@ -54,7 +36,6 @@ let addTodo = () => {
         for (let i = 0; i < items.length; i++) {
             items[i].onclick = function () {
                 liIndex = tab.indexOf(this.innerHTML);
-                console.log("INDEX = " + liIndex);
                 updateTodo(liIndex);
             };
         }
@@ -73,10 +54,8 @@ let addTodo = () => {
 
         // get li index using tab array on li click event
         for (let i = 0; i < items.length; i++) {
-
             items[i].onclick = function () {
                 liIndex = tab.indexOf(this.innerHTML);
-                console.log("INDEX = " + liIndex);
                 removeTodo(liIndex);
             };
         }
@@ -103,7 +82,7 @@ let addTodo = () => {
 
     //localStorage.setItem('person', JSON.stringify(person));
     localStorage.setItem(todo.id, JSON.stringify(todo));
-    console.log(todos);
+
     fetchTodos(todo.id);
 
     let checkbox_span = document.createElement('span');
@@ -112,7 +91,6 @@ let addTodo = () => {
     checkbox_span.appendChild(checkbox);
     checkbox_span.classList.add('col-span-1');
     checkbox.addEventListener('click', function () {
-        console.log('checkbox clicked');
         let items = document.querySelectorAll("#ul li");
         let tab = [];
         let liIndex;
@@ -128,7 +106,6 @@ let addTodo = () => {
 
             items[i].onclick = function () {
                 liIndex = tab.indexOf(this.innerHTML);
-                console.log("INDEX = " + liIndex);
                 completeTodo(liIndex);
             };
         }
@@ -145,16 +122,9 @@ let addTodo = () => {
     // style li 
     li.classList.add('cursor-pointer', 'border', 'border-blue-300', 'hover:border-blue-400', 'mt-2', 'rounded-md', 'bg-gray-100', 'grid', 'grid-cols-12', 'px-2');
 
-
     ul.appendChild(li);
     ul.classList.add('px-2');
-
-    console.log(ul);
-    console.log(li);
-    console.log(typeof ul)
     todo_input_el.value = '';
-
-
 }
 
 // delete todo element
@@ -164,9 +134,7 @@ let removeTodo = (i) => {
 }
 
 let updateTodo = (i) => {
-    console.log(todos[i].value);
     todo_input_el.value = todos[i].value;
-    console.log(todo_input_el.value);
     removeTodo(i);
 }
 
@@ -181,8 +149,8 @@ let completeTodo = (i) => {
 }
 
 let fetchTodos = (id) => {
-    let t = JSON.parse(localStorage.getItem(id));
-    console.log(t);
+    let list = JSON.parse(localStorage.getItem(id));
+    return list
 }
 
 let clearAllTodos = () => {
